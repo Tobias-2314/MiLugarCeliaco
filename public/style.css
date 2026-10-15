@@ -156,3 +156,5 @@ footer ul { list-style: none; padding: 0; margin: .75rem 0 0; display: flex; gap
   .llamar-fijo::before { content: "📞"; margin-right: .5rem; }
   .botones .btn { width: 100%; }
 }
+
+.texto-ancho { max-width: 46rem; }

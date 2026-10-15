@@ -1,5 +1,5 @@
 {
-  "_ayuda": "Edita aquí los textos y datos. Todo lo que empiece por [COMPLETAR se muestra resaltado en amarillo en la web. Al terminar, ejecuta: node build.mjs",
+  "_ayuda": "Edita aquí los textos y datos. Los campos vacíos (\"\") no se muestran en la web. Al terminar, ejecuta: node build.mjs",
 
   "negocio": {
     "nombre": "Mi Lugar Celíaco",
@@ -19,8 +19,7 @@
 
   "enlaces": {
     "resenasGoogle": "",
-    "whatsappActivo": true,
-    "whatsappConfirmado": false
+    "whatsappActivo": false
   },
 
   "aviso": {
@@ -32,20 +31,17 @@
   "quienesSomos": {
     "titulo": "Quiénes somos",
     "parrafos": [
-      "Somos un obrador y panadería de Xirivella dedicado al pan y la pastelería sin gluten, hechos con cariño para que todo el mundo pueda sentarse a la mesa.",
-      "[COMPLETAR: añadir 1-2 frases reales sobre su historia]"
-    ],
-    "fotoPendiente": "[COMPLETAR: foto real del obrador o de la fachada]"
+      "Somos un obrador y panadería de Xirivella dedicado al pan y la pastelería sin gluten, hechos con cariño para que todo el mundo pueda sentarse a la mesa."
+    ]
   },
 
   "queHacemos": {
     "titulo": "Qué hacemos",
     "intro": "Elaboramos pan, bollería, empanadas y pastelería sin gluten.",
-    "confirmarAptoCeliacos": "[COMPLETAR: confirmar si es apto para celíacos o tiene certificación]",
     "tarjetas": [
       {
         "titulo": "Dulces y bollería",
-        "texto": "[COMPLETAR: confirmar productos dulces y de bollería]",
+        "texto": "Bollería, galletas, magdalenas y tartaletas.",
         "foto": "img/vitrina-dulces.jpeg",
         "alt": "Vitrina de la tienda con bollería, galletas, magdalenas y tartaletas",
         "ancho": 515,
@@ -53,7 +49,7 @@
       },
       {
         "titulo": "Empanadas y salados",
-        "texto": "[COMPLETAR: confirmar productos salados y empanadas]",
+        "texto": "Empanadas, pizzas, tartas y tortas.",
         "foto": "img/vitrina-empanadas-tartas.jpeg",
         "alt": "Vitrina con empanadas, pizzas, tartas y tortas",
         "ancho": 447,
@@ -61,7 +57,7 @@
       },
       {
         "titulo": "Para acompañar el café",
-        "texto": "[COMPLETAR: confirmar productos y si se sirven en el local]",
+        "texto": "Donas glaseadas, empanadas y más.",
         "foto": "img/dona-empanada-cafe.jpeg",
         "alt": "Una dona glaseada y una empanada junto a una taza de café",
         "ancho": 225,
@@ -73,7 +69,7 @@
   "negocios": {
     "titulo": "Para negocios",
     "texto": "Somos una panadería mayorista. Si tienes una tienda, cafetería o restaurante y quieres ofrecer productos sin gluten a tus clientes, hablemos.",
-    "condiciones": "[COMPLETAR: condiciones de pedido mínimo o reparto, si existen]",
+    "condiciones": "",
     "boton": "Llamar para pedidos al por mayor"
   },
 
@@ -83,15 +79,15 @@
       "Entrada accesible para silla de ruedas",
       "Espacio amigable LGTBIQ+"
     ],
-    "horario": "[COMPLETAR: horario, cuando reabran]"
+    "horario": ""
   },
 
   "titular": {
-    "nombre": "[COMPLETAR: nombre o razón social]",
-    "nif": "[COMPLETAR: NIF/CIF]",
-    "domicilio": "[COMPLETAR: domicilio del titular]",
-    "email": "[COMPLETAR: email de contacto]",
-    "datosRegistrales": "[COMPLETAR: datos registrales, si procede]",
+    "nombre": "",
+    "nif": "",
+    "domicilio": "",
+    "email": "",
+    "datosRegistrales": "",
     "alojamiento": "Cloudflare Pages"
   }
 }

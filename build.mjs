@@ -20,6 +20,10 @@ const escapar = (valor) =>
 const texto = (valor) =>
   escapar(valor).replace(/\[COMPLETAR[^\]]*\]/g, (m) => `<span class="todo">${m}</span>`);
 
+// Párrafo/elemento solo si el dato existe
+const parrafo = (valor) => (valor ? `<p>${texto(valor)}</p>` : '');
+const item = (etiqueta, valor) => (valor ? `<li>${etiqueta}: ${texto(valor)}</li>` : '');
+
 const datosEstructurados = {
   '@context': 'https://schema.org',
   '@type': 'Bakery',
@@ -71,12 +75,9 @@ function cabeceraHtml({ titulo, descripcion, canonico, indexar, jsonld }) {
 
 function whatsappHtml() {
   if (!enlaces.whatsappActivo) return null;
-  const nota = enlaces.whatsappConfirmado
-    ? ''
-    : '<p><small><span class="todo">[COMPLETAR: confirmar si usan WhatsApp; si no, poner whatsappActivo a false en contenido.json]</span></small></p>';
   return {
     boton: `<a class="btn wa" href="${whatsappUrl}" target="_blank" rel="noopener">Escribir por WhatsApp</a>`,
-    nota,
+    nota: '',
   };
 }
 
@@ -110,9 +111,7 @@ function pieHtml() {
 
 function paginaInicio() {
   const wa = whatsappHtml();
-  const resenasNota = enlaces.resenasGoogle
-    ? ''
-    : '<p><small><span class="todo">[COMPLETAR: enlace directo a la ficha de Google en contenido.json → enlaces.resenasGoogle]</span></small></p>';
+  const resenasNota = '';
 
   return `${cabeceraHtml({
     titulo: n.tituloSeo,
@@ -149,12 +148,9 @@ function paginaInicio() {
     </div>
 
     <section id="quienes-somos">
-      <div class="wrap dos">
-        <div>
-          <h2>${escapar(quienesSomos.titulo)}</h2>
-          ${quienesSomos.parrafos.map((p) => `<p>${texto(p)}</p>`).join('\n          ')}
-        </div>
-        <div class="foto" role="img" aria-label="Espacio reservado para una foto real del obrador"><span>${texto(quienesSomos.fotoPendiente)}</span></div>
+      <div class="wrap texto-ancho">
+        <h2>${escapar(quienesSomos.titulo)}</h2>
+        ${quienesSomos.parrafos.map((p) => `<p>${texto(p)}</p>`).join('\n          ')}
       </div>
     </section>
 
@@ -162,7 +158,6 @@ function paginaInicio() {
       <div class="wrap">
         <h2>${escapar(queHacemos.titulo)}</h2>
         <p>${texto(queHacemos.intro)}</p>
-        <p>${texto(queHacemos.confirmarAptoCeliacos)}</p>
         <div class="tarjetas">${tarjetasHtml()}
         </div>
       </div>
@@ -172,7 +167,7 @@ function paginaInicio() {
       <div class="wrap">
         <h2>${escapar(negocios.titulo)}</h2>
         <p>${texto(negocios.texto)}</p>
-        <p>${texto(negocios.condiciones)}</p>
+        ${parrafo(negocios.condiciones)}
         <div class="botones">
           <a class="btn" href="${tel}">${escapar(negocios.boton)}</a>
         </div>
@@ -199,7 +194,7 @@ function paginaInicio() {
           ${escapar(`${n.codigoPostal} ${n.localidad}, ${n.provincia}`)}
         </address>
         <p class="tel"><a href="${tel}">${escapar(n.telefonoVisible)}</a></p>
-        <p>${texto(dondeEstamos.horario)}</p>
+        ${parrafo(dondeEstamos.horario)}
         <ul class="insignias">
           <li><span aria-hidden="true">♿</span> ${escapar(dondeEstamos.insignias[0])}</li>
           <li><span aria-hidden="true">🏳️‍🌈</span> ${escapar(dondeEstamos.insignias[1])}</li>
@@ -233,7 +228,6 @@ function paginaLegal({ ruta, titulo, descripcion, cuerpo }) {
   <main class="wrap legal">
     <p><a href="/">← Volver al inicio</a></p>
     <h1>${escapar(titulo)}</h1>
-    <p><span class="todo">[COMPLETAR: revisar este texto con el titular antes de publicar]</span></p>
 ${cuerpo}
   </main>
   ${pieHtml()}
@@ -251,12 +245,12 @@ const avisoLegal = paginaLegal({
   cuerpo: `
     <h2>Datos del titular (Ley 34/2002, LSSI-CE)</h2>
     <ul>
-      <li>Titular: ${texto(titular.nombre)}</li>
-      <li>NIF/CIF: ${texto(titular.nif)}</li>
-      <li>Domicilio: ${texto(titular.domicilio)}</li>
-      <li>Correo electrónico: ${texto(titular.email)}</li>
+      ${item('Titular', titular.nombre) || `<li>Titular: ${escapar(n.nombre)}</li>`}
+      ${item('NIF/CIF', titular.nif)}
+      ${item('Domicilio', titular.domicilio)}
+      ${item('Correo electrónico', titular.email)}
       <li>Teléfono: ${escapar(n.telefonoVisible)}</li>
-      <li>Datos registrales (si procede): ${texto(titular.datosRegistrales)}</li>
+      ${item('Datos registrales', titular.datosRegistrales)}
       <li>Establecimiento: ${escapar(direccionCompleta)}</li>
     </ul>
 
@@ -282,7 +276,7 @@ const privacidad = paginaLegal({
   descripcion: `Política de privacidad de ${dominioCorto}.`,
   cuerpo: `
     <h2>Responsable</h2>
-    <p>${texto(titular.nombre)}, NIF ${texto(titular.nif)}, ${texto(titular.domicilio)}. Contacto: ${texto(titular.email)}.</p>
+    <p>${escapar(titular.nombre || n.nombre)}${titular.nif ? `, NIF ${escapar(titular.nif)}` : ''}, ${escapar(titular.domicilio || direccionCompleta)}.${titular.email ? ` Contacto: ${escapar(titular.email)}.` : ` Contacto: ${escapar(n.telefonoVisible)}.`}</p>
 
     <h2>Qué datos tratamos</h2>
     <p>Esta web no tiene formularios, no usa cookies y no incorpora analítica ni herramientas de seguimiento. No recoge datos personales de quien la visita.</p>
