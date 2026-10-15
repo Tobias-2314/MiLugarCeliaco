@@ -54,10 +54,12 @@ function cabeceraHtml({ titulo, descripcion, canonico, indexar, jsonld }) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapar(titulo)}</title>
   <meta name="description" content="${escapar(descripcion)}">
-  <meta name="theme-color" content="#4d7a63">
+  <meta name="theme-color" content="#2e7d6b">
   ${indexar ? '' : '<meta name="robots" content="noindex">'}
   <link rel="canonical" href="${canonico}">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/young-serif.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/figtree.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/style.css">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_ES">
@@ -81,17 +83,17 @@ function whatsappHtml() {
   };
 }
 
-function tarjetasHtml() {
+function galeriaHtml() {
   return queHacemos.tarjetas
     .map(
-      (t) => `
-          <article class="tarjeta">
+      (t, i) => `
+          <figure class="arco arco-${i + 1}">
             <img src="/${t.foto}" alt="${escapar(t.alt)}" width="${t.ancho}" height="${t.alto}" loading="lazy" decoding="async">
-            <div class="tarjeta-cuerpo">
+            <figcaption>
               <h3>${escapar(t.titulo)}</h3>
               <p>${texto(t.texto)}</p>
-            </div>
-          </article>`,
+            </figcaption>
+          </figure>`,
     )
     .join('');
 }
@@ -111,7 +113,7 @@ function pieHtml() {
 
 function paginaInicio() {
   const wa = whatsappHtml();
-  const resenasNota = '';
+  const [primero, ...resto] = quienesSomos.parrafos;
 
   return `${cabeceraHtml({
     titulo: n.tituloSeo,
@@ -124,87 +126,81 @@ function paginaInicio() {
   <a class="salto" href="#contenido">Saltar al contenido</a>
 
   <header class="hero">
-    <div class="wrap">
-      <img class="logo" src="/img/logo.jpeg" alt="Logotipo de ${escapar(n.nombre)}: pastelería argentina gluten free" width="450" height="444">
-      <h1>${escapar(n.nombre)}</h1>
-      <p class="lema">${escapar(n.fraseCorta)}</p>
-      <p class="sublema">${escapar(n.subfrase)}</p>
-      <div class="botones centro">
-        <a class="btn" href="${tel}">Llamar</a>
+    <div class="wrap hero-grid">
+      <div class="hero-texto">
+        <h1>${escapar(n.nombre)}</h1>
+        <p class="lema">${escapar(n.fraseCorta)}</p>
+        <p class="sublema">${escapar(n.subfrase)}</p>
+        <div class="botones">
+          <a class="btn" href="${tel}">Llamar</a>
+          <a class="btn sec" href="${mapsComoLlegar}" target="_blank" rel="noopener">Cómo llegar</a>
+        </div>
+      </div>
+      <div class="hero-logo">
+        <img src="/img/logo.jpeg" alt="Logotipo de ${escapar(n.nombre)}: pastelería argentina gluten free" width="450" height="444">
       </div>
     </div>
   </header>
 
   <main id="contenido">
     <div class="wrap">
-      <aside class="aviso" aria-labelledby="aviso-t">
+      <aside class="cartel" aria-labelledby="aviso-t">
         <h2 id="aviso-t">${escapar(aviso.titulo)}</h2>
         <p>${texto(aviso.texto)}</p>
         <p>${texto(aviso.invitacion)}</p>
-        <div class="botones">
-          <a class="btn" href="${tel}">Llamar al ${escapar(n.telefonoVisible)}</a>
-        </div>
+        <a class="btn" href="${tel}">Llamar al ${escapar(n.telefonoVisible)}</a>
       </aside>
     </div>
 
     <section id="quienes-somos">
       <div class="wrap texto-ancho">
         <h2>${escapar(quienesSomos.titulo)}</h2>
-        ${quienesSomos.parrafos.map((p) => `<p>${texto(p)}</p>`).join('\n          ')}
+        <p class="destacado">${texto(primero)}</p>
+        ${resto.map((p) => `<p>${texto(p)}</p>`).join('\n        ')}
       </div>
     </section>
 
-    <section id="que-hacemos" class="alt">
+    <section id="que-hacemos" class="rosado">
       <div class="wrap">
         <h2>${escapar(queHacemos.titulo)}</h2>
-        <p>${texto(queHacemos.intro)}</p>
-        <div class="tarjetas">${tarjetasHtml()}
+        <p class="intro">${texto(queHacemos.intro)}</p>
+        <div class="galeria">${galeriaHtml()}
         </div>
       </div>
     </section>
 
-    <section id="negocios">
-      <div class="wrap">
+    <section id="negocios" class="banda">
+      <div class="wrap texto-ancho">
         <h2>${escapar(negocios.titulo)}</h2>
         <p>${texto(negocios.texto)}</p>
         ${parrafo(negocios.condiciones)}
-        <div class="botones">
-          <a class="btn" href="${tel}">${escapar(negocios.boton)}</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="resenas" class="alt">
-      <div class="wrap centro-texto">
-        <h2>Reseñas</h2>
-        <p>Lo que opinan nuestros clientes está en Google.</p>
-        <div class="botones centro">
-          <a class="btn sec" href="${resenasUrl}" target="_blank" rel="noopener">Ver nuestras reseñas en Google</a>
-        </div>
-        ${resenasNota}
+        <a class="btn claro" href="${tel}">${escapar(negocios.boton)}</a>
       </div>
     </section>
 
     <section id="donde-estamos">
-      <div class="wrap">
-        <h2>${escapar(dondeEstamos.titulo)}</h2>
-        <address>
-          <strong>${escapar(n.nombre)}</strong><br>
-          ${escapar(n.calle)}<br>
-          ${escapar(`${n.codigoPostal} ${n.localidad}, ${n.provincia}`)}
-        </address>
-        <p class="tel"><a href="${tel}">${escapar(n.telefonoVisible)}</a></p>
-        ${parrafo(dondeEstamos.horario)}
-        <ul class="insignias">
-          <li><span aria-hidden="true">♿</span> ${escapar(dondeEstamos.insignias[0])}</li>
-          <li><span aria-hidden="true">🏳️‍🌈</span> ${escapar(dondeEstamos.insignias[1])}</li>
-        </ul>
-        <div class="botones mt">
-          <a class="btn" href="${mapsComoLlegar}" target="_blank" rel="noopener">Cómo llegar</a>
-          <a class="btn" href="${tel}">Llamar</a>
-          ${wa ? wa.boton : ''}
+      <div class="wrap donde">
+        <div>
+          <h2>${escapar(dondeEstamos.titulo)}</h2>
+          <address>
+            ${escapar(n.calle)}<br>
+            ${escapar(`${n.codigoPostal} ${n.localidad}, ${n.provincia}`)}
+          </address>
+          <p class="tel"><a href="${tel}">${escapar(n.telefonoVisible)}</a></p>
+          ${parrafo(dondeEstamos.horario)}
         </div>
-        ${wa ? wa.nota : ''}
+        <div>
+          <ul class="insignias">
+            <li><span aria-hidden="true">♿</span> ${escapar(dondeEstamos.insignias[0])}</li>
+            <li><span aria-hidden="true">🏳️‍🌈</span> ${escapar(dondeEstamos.insignias[1])}</li>
+          </ul>
+          <div class="botones">
+            <a class="btn" href="${mapsComoLlegar}" target="_blank" rel="noopener">Cómo llegar</a>
+            <a class="btn sec" href="${tel}">Llamar</a>
+            ${wa ? wa.boton : ''}
+          </div>
+          <p class="resenas"><a href="${resenasUrl}" target="_blank" rel="noopener">Ver nuestras reseñas en Google</a></p>
+        </div>
       </div>
     </section>
   </main>
