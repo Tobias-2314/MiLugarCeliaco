@@ -1,0 +1,11 @@
+{
+  "name": "mi-lugar-celiaco-web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Web estática de Mi Lugar Celíaco",
+  "scripts": {
+    "build": "node build.mjs",
+    "start": "node build.mjs && node serve.mjs"
+  }
+}

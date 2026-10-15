@@ -1,0 +1,97 @@
+{
+  "_ayuda": "Edita aquí los textos y datos. Todo lo que empiece por [COMPLETAR se muestra resaltado en amarillo en la web. Al terminar, ejecuta: node build.mjs",
+
+  "negocio": {
+    "nombre": "Mi Lugar Celíaco",
+    "fraseCorta": "Panadería y obrador sin gluten en Xirivella",
+    "subfrase": "Pastelería argentina gluten free",
+    "dominio": "https://milugarceliaco.store",
+    "telefonoVisible": "640 15 35 62",
+    "telefonoInternacional": "+34640153562",
+    "calle": "C. de Sant Antoni, 5",
+    "codigoPostal": "46950",
+    "localidad": "Xirivella",
+    "provincia": "Valencia",
+    "pais": "ES",
+    "tituloSeo": "Mi Lugar Celíaco · Panadería sin gluten en Xirivella (Valencia)",
+    "descripcionSeo": "Panadería y obrador sin gluten en Xirivella (Valencia). Venta a tiendas y cafeterías. C. de Sant Antoni, 5. Tel. 640 15 35 62."
+  },
+
+  "enlaces": {
+    "resenasGoogle": "",
+    "whatsappActivo": true,
+    "whatsappConfirmado": false
+  },
+
+  "aviso": {
+    "titulo": "Estamos cerrados temporalmente",
+    "texto": "Por ahora no tenemos fecha de reapertura. Gracias por tu paciencia y por tu cariño.",
+    "invitacion": "Si tienes cualquier consulta, llámanos."
+  },
+
+  "quienesSomos": {
+    "titulo": "Quiénes somos",
+    "parrafos": [
+      "Somos un obrador y panadería de Xirivella dedicado al pan y la pastelería sin gluten, hechos con cariño para que todo el mundo pueda sentarse a la mesa.",
+      "[COMPLETAR: añadir 1-2 frases reales sobre su historia]"
+    ],
+    "fotoPendiente": "[COMPLETAR: foto real del obrador o de la fachada]"
+  },
+
+  "queHacemos": {
+    "titulo": "Qué hacemos",
+    "intro": "Elaboramos pan, bollería, empanadas y pastelería sin gluten.",
+    "confirmarAptoCeliacos": "[COMPLETAR: confirmar si es apto para celíacos o tiene certificación]",
+    "tarjetas": [
+      {
+        "titulo": "Dulces y bollería",
+        "texto": "[COMPLETAR: confirmar productos dulces y de bollería]",
+        "foto": "img/vitrina-dulces.jpeg",
+        "alt": "Vitrina de la tienda con bollería, galletas, magdalenas y tartaletas",
+        "ancho": 515,
+        "alto": 388
+      },
+      {
+        "titulo": "Empanadas y salados",
+        "texto": "[COMPLETAR: confirmar productos salados y empanadas]",
+        "foto": "img/vitrina-empanadas-tartas.jpeg",
+        "alt": "Vitrina con empanadas, pizzas, tartas y tortas",
+        "ancho": 447,
+        "alto": 447
+      },
+      {
+        "titulo": "Para acompañar el café",
+        "texto": "[COMPLETAR: confirmar productos y si se sirven en el local]",
+        "foto": "img/dona-empanada-cafe.jpeg",
+        "alt": "Una dona glaseada y una empanada junto a una taza de café",
+        "ancho": 225,
+        "alto": 225
+      }
+    ]
+  },
+
+  "negocios": {
+    "titulo": "Para negocios",
+    "texto": "Somos una panadería mayorista. Si tienes una tienda, cafetería o restaurante y quieres ofrecer productos sin gluten a tus clientes, hablemos.",
+    "condiciones": "[COMPLETAR: condiciones de pedido mínimo o reparto, si existen]",
+    "boton": "Llamar para pedidos al por mayor"
+  },
+
+  "dondeEstamos": {
+    "titulo": "Dónde estamos",
+    "insignias": [
+      "Entrada accesible para silla de ruedas",
+      "Espacio amigable LGTBIQ+"
+    ],
+    "horario": "[COMPLETAR: horario, cuando reabran]"
+  },
+
+  "titular": {
+    "nombre": "[COMPLETAR: nombre o razón social]",
+    "nif": "[COMPLETAR: NIF/CIF]",
+    "domicilio": "[COMPLETAR: domicilio del titular]",
+    "email": "[COMPLETAR: email de contacto]",
+    "datosRegistrales": "[COMPLETAR: datos registrales, si procede]",
+    "alojamiento": "Cloudflare Pages"
+  }
+}

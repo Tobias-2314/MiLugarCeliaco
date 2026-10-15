@@ -1,0 +1,158 @@
+:root {
+  --crema: #fbf5e9;
+  --crema-oscuro: #f1e6d0;
+  --tostado: #a8672b;
+  --tostado-oscuro: #7a4417;
+  --verde: #4d7a63;
+  --verde-claro: #e0eee6;
+  --texto: #33261a;
+  --aviso: #fff1cf;
+  --radio: 16px;
+  --ancho: 68rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--crema);
+  color: var(--texto);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+h1, h2, h3 {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  line-height: 1.2;
+  color: var(--tostado-oscuro);
+  margin: 0 0 .6em;
+}
+h1 { font-size: clamp(2.1rem, 8vw, 3.6rem); }
+h2 { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+h3 { font-size: 1.25rem; }
+
+a { color: var(--tostado-oscuro); text-underline-offset: .2em; }
+a:hover { color: var(--verde); }
+
+:focus-visible { outline: 3px solid var(--verde); outline-offset: 3px; border-radius: 4px; }
+
+.salto {
+  position: absolute; left: -999px; top: 0;
+  background: var(--tostado-oscuro); color: #fff; padding: .6rem 1rem; z-index: 10;
+}
+.salto:focus { left: 0; color: #fff; }
+
+.wrap { width: min(100% - 2.5rem, var(--ancho)); margin-inline: auto; }
+section { padding-block: clamp(2.5rem, 7vw, 4.5rem); }
+.alt { background: var(--crema-oscuro); }
+
+/* Cabecera */
+.hero {
+  background: linear-gradient(180deg, var(--verde-claro), var(--crema));
+  padding-block: clamp(3rem, 10vw, 6rem) clamp(2rem, 6vw, 3.5rem);
+  text-align: center;
+}
+.hero .sello {
+  display: inline-block; margin-bottom: 1rem; padding: .3rem .9rem;
+  border: 2px solid var(--verde); border-radius: 999px;
+  color: #3f5a3b; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: .8rem;
+}
+.hero p.lema { font-size: 1.25rem; max-width: 36rem; margin: 0 auto; }
+
+/* Aviso */
+.aviso {
+  background: var(--aviso);
+  border: 2px solid #e2b957;
+  border-radius: var(--radio);
+  padding: 1.5rem;
+  margin-top: -1.5rem;
+  position: relative;
+  box-shadow: 0 6px 18px rgb(120 80 20 / .12);
+}
+.aviso h2 { font-size: 1.5rem; margin-bottom: .4em; }
+.aviso p { margin: 0 0 1rem; }
+
+/* Botones */
+.botones { display: flex; flex-wrap: wrap; gap: .75rem; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 48px; padding: .7rem 1.4rem;
+  background: var(--tostado-oscuro); color: #fff;
+  border-radius: 999px; font-weight: 700; text-decoration: none;
+  border: 2px solid var(--tostado-oscuro);
+}
+.btn:hover { background: var(--tostado); border-color: var(--tostado); color: #fff; }
+.btn.sec { background: transparent; color: var(--tostado-oscuro); }
+.btn.sec:hover { background: var(--tostado-oscuro); color: #fff; }
+.btn.wa { background: #1c6b3f; border-color: #1c6b3f; }
+.btn.wa:hover { background: #14502e; border-color: #14502e; }
+
+/* Rejillas */
+.dos { display: grid; gap: 2rem; align-items: center; }
+@media (min-width: 760px) { .dos { grid-template-columns: 1fr 1fr; } }
+
+/* Huecos de foto */
+.foto {
+  aspect-ratio: 4 / 3;
+  display: grid; place-items: center; text-align: center; padding: 1rem;
+  border: 3px dashed var(--tostado);
+  border-radius: var(--radio);
+  background: repeating-linear-gradient(45deg, #fff9ec, #fff9ec 14px, var(--crema-oscuro) 14px, var(--crema-oscuro) 28px);
+  color: var(--tostado-oscuro); font-weight: 600;
+}
+.galeria { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); margin-top: 1.5rem; }
+
+/* Marcadores a completar */
+.todo {
+  background: #ffe08a; color: #4a3200;
+  padding: .05em .4em; border-radius: 4px; font-weight: 600;
+}
+
+.insignias { list-style: none; padding: 0; margin: 1rem 0 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+.insignias li { background: var(--verde-claro); color: #2f4a2b; padding: .35rem .9rem; border-radius: 999px; font-size: .95rem; font-weight: 600; }
+
+address { font-style: normal; }
+.tel { font-size: 1.5rem; font-weight: 700; }
+.mt { margin-top: 1.5rem; }
+
+/* Pie */
+footer { background: var(--tostado-oscuro); color: #fff4e2; padding-block: 2rem; font-size: .95rem; }
+footer a { color: #fff; }
+footer ul { list-style: none; padding: 0; margin: .75rem 0 0; display: flex; gap: 1.25rem; flex-wrap: wrap; }
+
+/* Páginas legales */
+.legal { max-width: 46rem; padding-block: 3rem; }
+.legal h2 { margin-top: 1.8em; font-size: 1.4rem; }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Logo y cabecera */
+.logo { width: 168px; height: auto; border-radius: 50%; margin: 0 auto 1rem; display: block; box-shadow: 0 4px 14px rgb(0 0 0 / .12); }
+.sublema { margin: .3rem 0 1.25rem; font-weight: 600; color: #3a6450; }
+.centro { justify-content: center; }
+.centro-texto { text-align: center; }
+
+/* Tarjetas de producto */
+.tarjetas { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin-top: 1.5rem; }
+.tarjeta { background: #fff; border-radius: var(--radio); overflow: hidden; border: 1px solid #e6d8bb; }
+.tarjeta img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.tarjeta-cuerpo { padding: 1rem 1.25rem 1.25rem; }
+.tarjeta-cuerpo p { margin: 0; }
+
+/* Botón fijo de llamar (solo móvil) */
+.llamar-fijo { display: none; }
+@media (max-width: 759px) {
+  body { padding-bottom: 5rem; }
+  .llamar-fijo {
+    display: flex; align-items: center; justify-content: center;
+    position: fixed; left: 1rem; right: 1rem; bottom: 1rem; z-index: 20;
+    min-height: 56px; border-radius: 999px;
+    background: var(--tostado-oscuro); color: #fff; font-weight: 700; font-size: 1.15rem; text-decoration: none;
+    box-shadow: 0 6px 20px rgb(0 0 0 / .3);
+  }
+  .llamar-fijo::before { content: "📞"; margin-right: .5rem; }
+  .botones .btn { width: 100%; }
+}
